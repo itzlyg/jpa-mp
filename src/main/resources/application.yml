@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: jpa-mp
+  profiles:
+    active: dev

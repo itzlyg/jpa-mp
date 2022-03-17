@@ -30,6 +30,5 @@ public class DataServiceImpl implements DataService {
         jpaService.addOne(jpa);
         // 写入 user
         userService.insert(params);
-
     }
 }

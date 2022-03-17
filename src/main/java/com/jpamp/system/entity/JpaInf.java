@@ -1,9 +1,10 @@
 package com.jpamp.system.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -14,8 +15,9 @@ import java.time.LocalDateTime;
 public class JpaInf implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "jpaIdGenerator", strategy = "com.jpamp.util.JpaIdGenerator")
+    @GeneratedValue(generator = "jpaIdGenerator")
+    private String id;
 
     /** 昵称 */
     @Column(name = "nick_name")
@@ -23,7 +25,7 @@ public class JpaInf implements Serializable {
 
     /** 用户ID */
     @Column(name = "user_id")
-    private Integer userId;
+    private String userId;
 
     /** 创建时间 */
     @Column(name = "create_time")
@@ -33,11 +35,11 @@ public class JpaInf implements Serializable {
     @Column(name = "modify_time")
     private LocalDateTime modifyTime;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -49,11 +51,11 @@ public class JpaInf implements Serializable {
         this.nickName = nickName;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

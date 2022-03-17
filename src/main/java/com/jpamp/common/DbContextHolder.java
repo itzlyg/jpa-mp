@@ -1,5 +1,7 @@
 package com.jpamp.common;
 
+import com.alibaba.ttl.TransmittableThreadLocal;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +12,8 @@ import java.util.Map;
  * @Date 2022/3/15 22:43
  */
 public class DbContextHolder {
-    private static final ThreadLocal contextHolder = new ThreadLocal<>();
+
+    private static final ThreadLocal<String> contextHolder = new TransmittableThreadLocal<>();
 
     /** 多租户与数据库的映射关系 */
     public static Map<String, String> TENANT_DB = new HashMap();
@@ -27,7 +30,7 @@ public class DbContextHolder {
      * @return
      */
     public static String getDbType() {
-        return (String) contextHolder.get();
+        return contextHolder.get();
     }
 
     /**

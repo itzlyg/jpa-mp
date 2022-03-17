@@ -38,7 +38,7 @@ public class DsSwitchAspect {
             return joinPoint.proceed();
         } finally {
             log.info("清除 datasource router...");
-            DbContextHolder.clearDbType();
+//            DbContextHolder.clearDbType();
         }
     }
 }

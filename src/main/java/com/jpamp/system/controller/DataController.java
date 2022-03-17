@@ -57,5 +57,11 @@ public class DataController {
         userService.insert(params);
         return System.currentTimeMillis() + "";
     }
+
+    @GetMapping("/transmittable")
+    public String transmittable() {
+        dataService.transmittable();
+        return System.currentTimeMillis() + "";
+    }
 }
 

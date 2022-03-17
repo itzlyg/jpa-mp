@@ -24,6 +24,7 @@
 
 		<mybatis.plus.version>3.5.1</mybatis.plus.version>
 		<druid.version>1.2.8</druid.version>
+		<transmittable.version>2.12.5</transmittable.version>
 
 	</properties>
 
@@ -71,6 +72,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>transmittable-thread-local</artifactId>
+			<version>${transmittable.version}</version>
 		</dependency>
 
 	</dependencies>

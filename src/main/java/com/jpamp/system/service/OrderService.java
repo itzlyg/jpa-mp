@@ -3,7 +3,6 @@ package com.jpamp.system.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jpamp.system.entity.OrderInf;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -17,5 +16,6 @@ import java.util.List;
  */
 public interface OrderService extends IService<OrderInf> {
     List<OrderInf> getOrderList();
-    BigDecimal getOrderPriceByUserId(Integer userId);
+
+    void asyncTest ();
 }

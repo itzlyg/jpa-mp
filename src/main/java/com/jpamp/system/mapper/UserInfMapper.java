@@ -2,7 +2,9 @@ package com.jpamp.system.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.jpamp.system.entity.UserInf;
+import org.apache.ibatis.annotations.Param;
 
 /**
 *  Mapper 接口
@@ -13,4 +15,5 @@ import com.jpamp.system.entity.UserInf;
 */
 public interface UserInfMapper extends BaseMapper<UserInf> {
 
+    IPage<UserInf> userPage(IPage<UserInf> page, @Param("p") UserInf user);
 }

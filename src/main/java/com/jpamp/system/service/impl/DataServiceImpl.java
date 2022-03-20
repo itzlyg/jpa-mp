@@ -1,10 +1,13 @@
 package com.jpamp.system.service.impl;
 
 import com.jpamp.system.entity.JpaInf;
+import com.jpamp.system.entity.UserInf;
 import com.jpamp.system.service.DataService;
 import com.jpamp.system.service.JpaService;
 import com.jpamp.system.service.OrderService;
 import com.jpamp.system.service.UserService;
+import com.jpamp.system.vo.BaseRequest;
+import com.jpamp.system.vo.BaseResponse;
 import com.jpamp.util.CustUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -75,5 +79,10 @@ public class DataServiceImpl implements DataService {
             }
         });
         return CustUtil.result();
+    }
+
+    @Override
+    public BaseResponse<List<UserInf>> userPage(BaseRequest<String> request) {
+        return userService.userPage(request);
     }
 }

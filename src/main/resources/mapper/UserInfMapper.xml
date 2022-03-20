@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jpamp.system.mapper.UserInfMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, age, create_time, modify_time
+    </sql>
+
+    <select id="userPage" resultType="com.jpamp.system.entity.UserInf">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wt_user_inf
+        <where>
+            <if test="p.age != null">
+                age = #{p.age,jdbcType=INTEGER}
+            </if>
+        </where>
+        order by create_time
+    </select>
+
+</mapper>

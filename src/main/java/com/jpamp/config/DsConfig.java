@@ -48,6 +48,7 @@ public class DsConfig {
             DbContextHolder.TENANT_DB.put(String.valueOf(i++), p.getKey());
         }
         dynamicDataSource.setTargetDataSources(targetDataSources);
+        // 默认设置第一个连接为默认数据库
         dynamicDataSource.setDefaultTargetDataSource(targetDataSources.values().stream().findFirst().get());
         return dynamicDataSource;
     }

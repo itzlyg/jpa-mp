@@ -14,6 +14,13 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Map;
 
+
+/**
+ * jpa配置
+ * @Description
+ * @author YX
+ * @Date 2022/3/20 20:43
+ */
 @Configuration
 @EnableConfigurationProperties(JpaProperties.class)
 @EnableJpaRepositories(basePackages = {"com.jpamp.system.repository"},

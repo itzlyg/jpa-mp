@@ -1,5 +1,6 @@
 package com.jpamp.system.entity;
 
+import com.jpamp.context.Context;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -17,8 +18,8 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public abstract class BaseJpaEntity implements Serializable {
     @Id
-    @GeneratedValue(generator = "jpaIdGenerator")
-    @GenericGenerator(name = "jpaIdGenerator", strategy = "com.jpamp.util.JpaIdGenerator")
+    @GeneratedValue(generator = Context.JPA_ID_NAME)
+    @GenericGenerator(name = Context.JPA_ID_NAME, strategy = Context.JPA_STRATEGY)
     private String id;
     /** 创建时间 */
     @Column(name = "create_time")

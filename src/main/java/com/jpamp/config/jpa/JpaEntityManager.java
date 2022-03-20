@@ -1,5 +1,6 @@
 package com.jpamp.config.jpa;
 
+import com.jpamp.context.Context;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -23,7 +24,7 @@ import java.util.Map;
  */
 @Configuration
 @EnableConfigurationProperties(JpaProperties.class)
-@EnableJpaRepositories(basePackages = {"com.jpamp.system.repository"},
+@EnableJpaRepositories(basePackages = {Context.JPA_REPOSITORY},
         entityManagerFactoryRef = "entityManagerFactory",
         transactionManagerRef = "multipleTransactionManager")
 public class JpaEntityManager {
@@ -33,12 +34,6 @@ public class JpaEntityManager {
 
     @Autowired
     private DataSource multipleDataSource;
-
-    /**
-     * 基类包
-     */
-    private static final String ENTITY_PACKAGES = "com.jpamp.system.entity";
-
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(EntityManagerFactoryBuilder builder) {
@@ -50,7 +45,7 @@ public class JpaEntityManager {
         return builder
                 .dataSource(multipleDataSource)
                 .properties(properties)
-                .packages(ENTITY_PACKAGES)
+                .packages(Context.ENTITY_PACKAGES)
                 .persistenceUnit("myPersistenceUnit")
                 .build();
     }

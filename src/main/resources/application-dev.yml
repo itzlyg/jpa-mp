@@ -6,25 +6,18 @@ spring:
     proxy-target-class: true
     auto: true
   datasource:
-    druid:
-      # 数据库 1
-      dbo:
-        url: jdbc:mysql://127.0.0.1:18012/jpa_mp_one?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true
-        username: root
-        password: root@Can10
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        initialSize: 5
-        minIdle: 5
-        maxActive: 20
-      # 数据库 2
-      dbt:
-        url: jdbc:mysql://127.0.0.1:18012/jpa_mp_two?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true
-        username: root
-        password: root@Can10
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        initialSize: 5
-        minIdle: 5
-        maxActive: 20
+    # 数据库 1
+    dbo:
+      url: jdbc:mysql://127.0.0.1:18012/jpa_mp_one?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true
+      username: root
+      password: root@Can10
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    # 数据库 2
+    dbt:
+      url: jdbc:mysql://127.0.0.1:18012/jpa_mp_two?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true
+      username: root
+      password: root@Can10
+      driver-class-name: com.mysql.cj.jdbc.Driver
 
 
   jpa:

@@ -6,19 +6,19 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Map;
 
 @Configuration
-@ConfigurationProperties(prefix = "spring.datasource")
+@ConfigurationProperties(prefix = "spring")
 public class DynamicDsProperties {
 
     /**
      * 每一个数据源
      */
-    private Map<String, DataSourceProperty> druid;
+    private Map<String, DataSourceProperty> datasource;
 
-    public Map<String, DataSourceProperty> getDruid() {
-        return druid;
+    public Map<String, DataSourceProperty> getDatasource() {
+        return datasource;
     }
 
-    public void setDruid(Map<String, DataSourceProperty> druid) {
-        this.druid = druid;
+    public void setDatasource(Map<String, DataSourceProperty> datasource) {
+        this.datasource = datasource;
     }
 }

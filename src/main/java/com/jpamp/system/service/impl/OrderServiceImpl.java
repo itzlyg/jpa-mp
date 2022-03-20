@@ -7,11 +7,8 @@ import com.jpamp.system.mapper.OrderInfMapper;
 import com.jpamp.system.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 /**
@@ -26,14 +23,6 @@ import java.util.List;
 public class OrderServiceImpl extends ServiceImpl<OrderInfMapper, OrderInf> implements OrderService {
 
     private Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
-
-    @Autowired
-    private OrderInfMapper orderMapper;
-
-    @Override
-    public List<OrderInf> getOrderList() {
-        return this.list();
-    }
 
     @Async
     @Override

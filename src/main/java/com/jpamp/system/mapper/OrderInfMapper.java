@@ -3,9 +3,6 @@ package com.jpamp.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jpamp.system.entity.OrderInf;
-import org.apache.ibatis.annotations.Select;
-
-import java.math.BigDecimal;
 
 /**
 *  Mapper 接口
@@ -16,6 +13,4 @@ import java.math.BigDecimal;
 */
 public interface OrderInfMapper extends BaseMapper<OrderInf> {
 
-    @Select("SELECT price from t_order where user_id =#{userId}")
-    BigDecimal getPriceByUserId(Integer userId);
 }

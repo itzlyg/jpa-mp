@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 /**
@@ -22,11 +21,6 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserInfMapper, UserInf> implements UserService {
-
-    @Override
-    public List<UserInf> getUserList() {
-        return this.list();
-    }
 
     @Override
     @Transactional(rollbackFor = Throwable.class)

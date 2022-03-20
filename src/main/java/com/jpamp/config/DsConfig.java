@@ -1,7 +1,6 @@
 package com.jpamp.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DataSourceProperty;
 import com.jpamp.common.DbContextHolder;
 import com.jpamp.common.DynamicDataSource;
 import org.apache.commons.lang3.StringUtils;
@@ -57,11 +56,12 @@ public class DsConfig {
 
     /**
      * 事物配置
+     *
      * @param dataSource
      * @return
      */
+    @Bean
     @Primary
-    @Bean(name = "multipleTransactionManager")
     public DataSourceTransactionManager multipleTransactionManager(@Qualifier("multipleDataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }

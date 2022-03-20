@@ -6,7 +6,10 @@ public class CustUtil {
 
     public static final String CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     public static String randomString(final int count){
-        return RandomStringUtils.random(8, CHARS);
+        return RandomStringUtils.random(count, CHARS);
+    }
 
+    public static String result (){
+        return String.valueOf(System.currentTimeMillis());
     }
 }

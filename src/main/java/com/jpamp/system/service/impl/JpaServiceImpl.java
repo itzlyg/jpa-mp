@@ -10,18 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class JpaServiceImpl implements JpaService {
 
-
     @Autowired
     private JpaInfRepository jpaInfRepository;
-
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public JpaInf addOne(JpaInf user) {
         return jpaInfRepository.save(user);
-    }
-    @Override
-    public JpaInf findById(Long id) {
-        return jpaInfRepository.getById(id);
     }
 }

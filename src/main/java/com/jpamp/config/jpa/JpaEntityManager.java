@@ -13,11 +13,12 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Map;
-@EnableJpaRepositories(basePackages={"com.jpamp.system.repository"} ,
-        entityManagerFactoryRef = "entityManagerFactory",
-        transactionManagerRef = "multipleTransactionManager")
+
 @Configuration
 @EnableConfigurationProperties(JpaProperties.class)
+@EnableJpaRepositories(basePackages = {"com.jpamp.system.repository"},
+        entityManagerFactoryRef = "entityManagerFactory",
+        transactionManagerRef = "multipleTransactionManager")
 public class JpaEntityManager {
 
     @Autowired
@@ -26,7 +27,13 @@ public class JpaEntityManager {
     @Autowired
     private DataSource multipleDataSource;
 
-    @Bean(name = "entityManagerFactoryBean")
+    /**
+     * 基类包
+     */
+    private static final String ENTITY_PACKAGES = "com.jpamp.system.entity";
+
+
+    @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(EntityManagerFactoryBuilder builder) {
         // 不明白为什么这里获取不到 application.yml 里的配置
         Map<String, String> properties = jpaProperties.getProperties();
@@ -36,13 +43,14 @@ public class JpaEntityManager {
         return builder
                 .dataSource(multipleDataSource)
                 .properties(properties)
-                .packages("com.jpamp.system.entity")
+                .packages(ENTITY_PACKAGES)
                 .persistenceUnit("myPersistenceUnit")
                 .build();
     }
 
+
+    @Bean
     @Primary
-    @Bean(name = "entityManagerFactory")
     public EntityManagerFactory entityManagerFactory(EntityManagerFactoryBuilder builder) {
         return this.entityManagerFactoryBean(builder).getObject();
     }

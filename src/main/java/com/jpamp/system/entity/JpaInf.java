@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
 public class JpaInf implements Serializable {
 
     @Id
-    @GenericGenerator(name = "jpaIdGenerator", strategy = "com.jpamp.util.JpaIdGenerator")
     @GeneratedValue(generator = "jpaIdGenerator")
+    @GenericGenerator(name = "jpaIdGenerator", strategy = "com.jpamp.util.JpaIdGenerator")
     private String id;
 
     /** 昵称 */

@@ -12,8 +12,9 @@ import org.springframework.stereotype.Component;
 
 /**
  * aop
- * @Description
+ *
  * @author YX
+ * @Description
  * @Date 2022/3/15 22:43
  */
 @Component
@@ -27,7 +28,7 @@ public class DsSwitchAspect {
     private void controllerAsp() {
     }
 
-    @Around( "controllerAsp()" )
+    @Around("controllerAsp()")
     public Object controllerAop(ProceedingJoinPoint joinPoint) throws Throwable {
         // mock user
         Integer u = RandomUtils.nextInt(0, 10);

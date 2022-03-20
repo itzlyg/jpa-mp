@@ -6,5 +6,4 @@ public interface JpaService {
 
     JpaInf addOne(JpaInf jpa);
 
-    JpaInf findById(Long id) ;
 }

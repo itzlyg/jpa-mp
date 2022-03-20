@@ -20,6 +20,7 @@ import java.util.concurrent.Executors;
 public class DataServiceImpl implements DataService {
 
     private Logger log = LoggerFactory.getLogger(DataServiceImpl.class);
+
     @Autowired
     private JpaService jpaService;
 
@@ -30,8 +31,22 @@ public class DataServiceImpl implements DataService {
     private OrderService orderService;
 
     @Override
+    public String addJpa() {
+        JpaInf inf = new JpaInf();
+        inf.setCreateTime(LocalDateTime.now());
+        jpaService.addOne(inf);
+        return CustUtil.result();
+    }
+
+    @Override
+    public String addUser(String params) {
+        userService.insert(params);
+        return CustUtil.result();
+    }
+
+    @Override
     @Transactional(rollbackFor = Throwable.class)
-    public void testTran (String params){
+    public String testTran (String params){
         JpaInf jpa = new JpaInf();
         jpa.setCreateTime(LocalDateTime.now());
         jpa.setNickName(CustUtil.randomString(8));
@@ -40,10 +55,11 @@ public class DataServiceImpl implements DataService {
         // 写入 user
         userService.insert(params);
         orderService.asyncTest();
+        return CustUtil.result();
     }
 
     @Override
-    public void transmittable(){
+    public String transmittable(){
 //        ExecutorService service = TtlExecutors.getTtlExecutorService(Executors.newCachedThreadPool());
         ExecutorService service = Executors.newSingleThreadExecutor();
 //        ThreadLocal<String> context = new ThreadLocal<>();
@@ -58,5 +74,6 @@ public class DataServiceImpl implements DataService {
                 e.printStackTrace();
             }
         });
+        return CustUtil.result();
     }
 }

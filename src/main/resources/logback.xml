@@ -3,6 +3,7 @@
 <configuration scan="true" scanPeriod="10 seconds">
 	<property scope="context" name="LOG_HOME" value="logs"/>
 	<property scope="context" name="PROJECT_NAME" value="mp"/>
+	<property scope="context" name="LOG_PATTERN" value="[%date{HH:mm:ss SSS}] [%thread %-5level]  %class{12}.%M [%L] - %msg%n"/>
 	<springProperty scope="context" name="LOG_HOME" source="logging.path" defaultValue="logs"/>
 	<springProperty scope="context" name="PROJECT_NAME" source="spring.application.name" defaultValue="mp"/>
 
@@ -10,9 +11,7 @@
 	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<append>true</append>
 		<encoder>
-			<pattern>
-				[ %-5level] [%date{yyyy-MM-dd HH:mm:ss}] %logger{96} [%line] - %msg%n
-			</pattern>
+			<pattern>${LOG_PATTERN}</pattern>
 			<charset>utf-8</charset>
 		</encoder>
 
@@ -29,9 +28,7 @@
 	<appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<append>true</append>
 		<encoder>
-			<pattern>
-				[ %-5level] [%date{yyyy-MM-dd HH:mm:ss}] %logger{96} [%line] - %msg%n
-			</pattern>
+			<pattern>${LOG_PATTERN}</pattern>
 			<charset>utf-8</charset>
 		</encoder>
 
@@ -50,9 +47,7 @@
 	<!-- 将日志写入控制台 -->
 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>
-				[ %-5level] [%date{yyyy-MM-dd HH:mm:ss}] %logger{96} [%line] - %msg%n
-			</pattern>
+			<pattern>${LOG_PATTERN}</pattern>
 			<!--<charset>utf-8</charset>-->
 		</encoder>
 	</appender>

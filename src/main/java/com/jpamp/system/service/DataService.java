@@ -16,5 +16,7 @@ public interface DataService {
 
     String transmittable();
 
+    long queryCount ();
+
     BaseResponse<List<UserInf>> userPage (BaseRequest<String> request);;
 }

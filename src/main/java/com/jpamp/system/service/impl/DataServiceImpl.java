@@ -63,6 +63,11 @@ public class DataServiceImpl implements DataService {
     }
 
     @Override
+    public long queryCount (){
+       return userService.count();
+    }
+
+    @Override
     public String transmittable(){
 //        ExecutorService service = TtlExecutors.getTtlExecutorService(Executors.newCachedThreadPool());
         ExecutorService service = Executors.newSingleThreadExecutor();

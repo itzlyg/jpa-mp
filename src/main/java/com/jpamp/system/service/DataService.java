@@ -14,7 +14,7 @@ public interface DataService {
 
     String testTran (String params);
 
-    String transmittable();
+    String async(String type);
 
     BaseResponse<List<UserInf>> userPage (BaseRequest<String> request);;
 }

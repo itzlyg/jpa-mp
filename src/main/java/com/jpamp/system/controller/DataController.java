@@ -44,9 +44,9 @@ public class DataController {
         return dataService.addUser(params);
     }
 
-    @GetMapping("/transmittable")
-    public String transmittable() {
-        return dataService.transmittable();
+    @GetMapping("/async/{type}")
+    public String transmittable(@PathVariable("type") String type) {
+        return dataService.async(type);
     }
 
     @PostMapping("/user_page")

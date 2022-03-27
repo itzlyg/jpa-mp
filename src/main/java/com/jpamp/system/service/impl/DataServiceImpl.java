@@ -1,5 +1,7 @@
 package com.jpamp.system.service.impl;
 
+import com.alibaba.ttl.TransmittableThreadLocal;
+import com.alibaba.ttl.threadpool.TtlExecutors;
 import com.jpamp.system.entity.JpaInf;
 import com.jpamp.system.entity.UserInf;
 import com.jpamp.system.service.DataService;
@@ -16,9 +18,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 @Service
 public class DataServiceImpl implements DataService {
@@ -63,26 +69,58 @@ public class DataServiceImpl implements DataService {
     }
 
     @Override
-    public String transmittable(){
-//        ExecutorService service = TtlExecutors.getTtlExecutorService(Executors.newCachedThreadPool());
+    public String async(String type){
         ExecutorService service = Executors.newSingleThreadExecutor();
-//        ThreadLocal<String> context = new ThreadLocal<>();
-        ThreadLocal<String> context = new InheritableThreadLocal<>();
-//        ThreadLocal<String> context = new TransmittableThreadLocal<>();
-        context.set("transmittable ThreadLocal");
-        service.execute(() -> {
-            try {
-                Thread.sleep(10 * 1000);
-                log.info("task {}", context.get());
-            } catch (Exception e) {
-                e.printStackTrace();
+        if ("transmittable".equals(type)) {
+            service = TtlExecutors.getTtlExecutorService(Executors.newCachedThreadPool());
+        }
+        List<CompletableFuture<Integer>> futures = new ArrayList<>();
+        for (int i = 0; i < 10000; i++) {
+            ThreadLocal<String> context;
+            // util 提供的 不在线程池里就可以传递到子线程里面去
+            if ("inheritable".equals(type)) {
+                context = new InheritableThreadLocal<>();
+                // 阿里巴巴提供
+            } else if ("transmittable".equals(type)) {
+                context = new TransmittableThreadLocal<>();
+            } else {
+                context = new ThreadLocal<>();
             }
-        });
-        return CustUtil.result();
+            futures.add(asyncThread(service, context));
+        }
+        int s = 0;
+        CompletableFuture<Void> downFutures = CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()]));
+        CompletableFuture<List<Integer>> ints = downFutures.thenApply(v -> futures.stream().map(CompletableFuture::join).collect(Collectors.toList()));
+        try {
+            List<Integer> list = ints.get();
+            s += list.stream().collect(Collectors.summingInt(Integer::intValue));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return "不相同的数量为" + s;
     }
 
     @Override
     public BaseResponse<List<UserInf>> userPage(BaseRequest<String> request) {
         return userService.userPage(request);
+    }
+
+    private CompletableFuture<Integer> asyncThread (ExecutorService service, ThreadLocal<String> context){
+        String id = System.currentTimeMillis() + CustUtil.randomString(8);
+        context.set(id);
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                String threadValue = context.get();
+                if (!id.equals(threadValue)) {
+                    log.error("主线程与子线程的值不一样--> {} --- {}", id, threadValue);
+                    return 1;
+                }
+            } finally {
+                context.remove();
+            }
+            return 0;
+        }, service);
     }
 }

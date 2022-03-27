@@ -2,7 +2,6 @@ package com.jpamp.config;
 
 import com.jpamp.common.DbContextHolder;
 import com.jpamp.common.DynamicDataSource;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -29,22 +28,12 @@ public class DsConfig {
     @Bean
     @Primary
     public DataSource multipleDataSource() {
-        DataSourceProperty dsp;
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
         Map<Object, Object> targetDataSources = new HashMap<>();
-        Map<String, DataSourceProperty> datasources = properties.getDatasource();
+        Map<String, DriverManagerDataSource> datasources = properties.getDatasource();
         int i = 0;
-        for (Map.Entry<String, DataSourceProperty> p : datasources.entrySet()) {
-            dsp = p.getValue();
-            DriverManagerDataSource dataSource = new DriverManagerDataSource ();
-            dataSource.setUsername(dsp.getUsername());
-            dataSource.setPassword(dsp.getPassword());
-            dataSource.setUrl(dsp.getUrl());
-            String driverClassName = dsp.getDriverClassName();
-            if (StringUtils.isNotEmpty(driverClassName)) {
-                dataSource.setDriverClassName(driverClassName);
-            }
-            targetDataSources.put(p.getKey(), dataSource);
+        for (Map.Entry<String, DriverManagerDataSource> p : datasources.entrySet()) {
+            targetDataSources.put(p.getKey(), p.getValue());
             DbContextHolder.TENANT_DB.put(String.valueOf(i++), p.getKey());
         }
         dynamicDataSource.setTargetDataSources(targetDataSources);

@@ -11,6 +11,7 @@ import com.jpamp.system.service.UserService;
 import com.jpamp.system.vo.BaseRequest;
 import com.jpamp.system.vo.BaseResponse;
 import com.jpamp.util.CustUtil;
+import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +22,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.stream.Collectors;
 
 @Service
 public class DataServiceImpl implements DataService {
-
-    private Logger log = LoggerFactory.getLogger(DataServiceImpl.class);
 
     @Autowired
     private JpaService jpaService;
@@ -39,6 +37,8 @@ public class DataServiceImpl implements DataService {
 
     @Autowired
     private OrderService orderService;
+
+    private Logger log = LoggerFactory.getLogger(DataServiceImpl.class);
 
     @Override
     public String addJpa() {
@@ -75,9 +75,13 @@ public class DataServiceImpl implements DataService {
 
     @Override
     public String async(String type){
-        ExecutorService service = Executors.newSingleThreadExecutor();
+        ExecutorService executor = new ScheduledThreadPoolExecutor(7,
+                new BasicThreadFactory.Builder()
+                        .namingPattern("system-pool-%d")
+                        .daemon(true)
+                        .build());
         if ("transmittable".equals(type)) {
-            service = TtlExecutors.getTtlExecutorService(Executors.newCachedThreadPool());
+            executor = TtlExecutors.getTtlExecutorService(executor);
         }
         List<CompletableFuture<Integer>> futures = new ArrayList<>();
         for (int i = 0; i < 10000; i++) {
@@ -91,7 +95,7 @@ public class DataServiceImpl implements DataService {
             } else {
                 context = new ThreadLocal<>();
             }
-            futures.add(asyncThread(service, context));
+            futures.add(asyncThread(executor, context));
         }
         int s = 0;
         CompletableFuture<Void> downFutures = CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()]));
@@ -99,10 +103,10 @@ public class DataServiceImpl implements DataService {
         try {
             List<Integer> list = ints.get();
             s += list.stream().collect(Collectors.summingInt(Integer::intValue));
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        } finally {
+            executor.shutdown();
         }
         return "不相同的数量为" + s;
     }

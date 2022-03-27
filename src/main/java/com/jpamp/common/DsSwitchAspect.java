@@ -33,7 +33,7 @@ public class DsSwitchAspect {
         // mock user
         Integer u = RandomUtils.nextInt(0, 10);
         String tenantId = String.valueOf(u % 2);
-        log.info("切换到{} 数据源...", tenantId);
+        log.info("切换到数据库{}，执行业务逻辑...", DbContextHolder.TENANT_DB.get(tenantId));
         DbContextHolder.setDbType(tenantId);
         try {
             return joinPoint.proceed();

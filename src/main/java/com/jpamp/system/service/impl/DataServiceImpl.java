@@ -69,6 +69,11 @@ public class DataServiceImpl implements DataService {
     }
 
     @Override
+    public long queryCount (){
+        return userService.count();
+    }
+
+    @Override
     public String async(String type){
         ExecutorService service = Executors.newSingleThreadExecutor();
         if ("transmittable".equals(type)) {

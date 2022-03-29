@@ -19,4 +19,6 @@ public interface DataService {
     long queryCount ();
 
     BaseResponse<List<UserInf>> userPage (BaseRequest<String> request);;
+
+    void async ();
 }

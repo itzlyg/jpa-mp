@@ -5,6 +5,9 @@ import com.jpamp.system.entity.UserInf;
 import com.jpamp.system.service.DataService;
 import com.jpamp.system.vo.BaseRequest;
 import com.jpamp.system.vo.BaseResponse;
+import com.jpamp.util.CustUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +29,8 @@ import java.util.List;
 @RequestMapping("/api")
 public class DataController {
 
+    private Logger log = LoggerFactory.getLogger(DataController.class);
+
     @Autowired
     private DataService dataService;
 
@@ -33,6 +38,15 @@ public class DataController {
     public String jpa() {
         return dataService.addJpa();
     }
+
+    @GetMapping("/async")
+    public String async() {
+        log.info("进入 controller ～");
+        dataService.async();
+        log.info("返回 controller ～");
+        return CustUtil.result();
+    }
+
 
     @GetMapping("/tra/{params}")
     public String testTran(@PathVariable("params") String params) {

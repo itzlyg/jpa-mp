@@ -2,6 +2,7 @@ package com.jpamp.system.service.impl;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
 import com.alibaba.ttl.threadpool.TtlExecutors;
+import com.jpamp.common.DbContextHolder;
 import com.jpamp.system.entity.JpaInf;
 import com.jpamp.system.entity.UserInf;
 import com.jpamp.system.service.DataService;
@@ -15,6 +16,7 @@ import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -114,6 +116,20 @@ public class DataServiceImpl implements DataService {
     @Override
     public BaseResponse<List<UserInf>> userPage(BaseRequest<String> request) {
         return userService.userPage(request);
+    }
+
+    @Async
+    @Override
+    public void async (){
+        try {
+            log.info("进入  async,数据源信息:{}", DbContextHolder.getDbType());
+
+            Thread.sleep(15 * 1000);
+            log.info("  async 结束");
+            log.info("async 结束,数据源信息:{}", DbContextHolder.getDbType());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private CompletableFuture<Integer> asyncThread (ExecutorService service, ThreadLocal<String> context){

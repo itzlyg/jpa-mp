@@ -58,7 +58,7 @@ public class DataServiceImpl implements DataService {
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
-    public String testTran (String params){
+    public String testTran(String params) {
         JpaInf jpa = new JpaInf();
         jpa.setCreateTime(LocalDateTime.now());
         jpa.setNickName(CustUtil.randomString(8));
@@ -71,12 +71,12 @@ public class DataServiceImpl implements DataService {
     }
 
     @Override
-    public long queryCount (){
+    public long queryCount() {
         return userService.count();
     }
 
     @Override
-    public String async(String type){
+    public String async(String type) {
         ExecutorService executor = new ScheduledThreadPoolExecutor(7,
                 new BasicThreadFactory.Builder()
                         .namingPattern("system-pool-%d")
@@ -120,7 +120,7 @@ public class DataServiceImpl implements DataService {
 
     @Async
     @Override
-    public void async (){
+    public void async() {
         try {
             log.info("进入  async,数据源信息:{}", DbContextHolder.getDbType());
 
@@ -132,7 +132,7 @@ public class DataServiceImpl implements DataService {
         }
     }
 
-    private CompletableFuture<Integer> asyncThread (ExecutorService service, ThreadLocal<String> context){
+    private CompletableFuture<Integer> asyncThread(ExecutorService service, ThreadLocal<String> context) {
         String id = System.currentTimeMillis() + CustUtil.randomString(8);
         context.set(id);
         return CompletableFuture.supplyAsync(() -> {

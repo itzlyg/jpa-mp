@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface UserService extends IService<UserInf> {
 
-    void insert (String params);
+    void insert(String params);
 
-    BaseResponse<List<UserInf>> userPage (BaseRequest<String> request);
+    BaseResponse<List<UserInf>> userPage(BaseRequest<String> request);
 }

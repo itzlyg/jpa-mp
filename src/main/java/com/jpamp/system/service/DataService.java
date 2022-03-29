@@ -8,17 +8,17 @@ import java.util.List;
 
 public interface DataService {
 
-    String addJpa ();
+    String addJpa();
 
-    String addUser (String params);
+    String addUser(String params);
 
-    String testTran (String params);
+    String testTran(String params);
 
     String async(String type);
 
-    long queryCount ();
+    long queryCount();
 
-    BaseResponse<List<UserInf>> userPage (BaseRequest<String> request);;
+    BaseResponse<List<UserInf>> userPage(BaseRequest<String> request);
 
-    void async ();
+    void async();
 }

@@ -16,7 +16,7 @@ public class TaskAspect {
     private static final Logger LOG = LoggerFactory.getLogger(TaskAspect.class);
 
     @Around("@annotation(com.jpamp.annotation.TenantTask)")
-    public Object point(ProceedingJoinPoint pjp) throws  Throwable {
+    public Object point(ProceedingJoinPoint pjp) throws Throwable {
         Object o = null;
         Map<String, String> tenantMap = DbContextHolder.TENANT_DB;
         try {

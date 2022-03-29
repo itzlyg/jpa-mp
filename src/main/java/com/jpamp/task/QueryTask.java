@@ -18,7 +18,7 @@ public class QueryTask {
 
     @TenantTask
     @Scheduled(cron = "0 0/1 * * * ?")
-    public void queryData (){
+    public void queryData() {
         long l = dataService.queryCount();
         log.info("查询到的用户数量为{}", l);
     }

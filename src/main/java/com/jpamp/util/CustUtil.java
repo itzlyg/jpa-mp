@@ -13,15 +13,16 @@ import java.util.function.Function;
 public class CustUtil {
 
     public static final String CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    public static String randomString(final int count){
+
+    public static String randomString(final int count) {
         return RandomStringUtils.random(count, CHARS);
     }
 
-    public static String result (){
+    public static String result() {
         return String.valueOf(System.currentTimeMillis());
     }
 
-    public static <T> BaseResponse<List<T>> page (PagingRequest requestPage, Function<Page<T>, IPage<T>> function) {
+    public static <T> BaseResponse<List<T>> page(PagingRequest requestPage, Function<Page<T>, IPage<T>> function) {
         int pageSize = requestPage.getPageSize();
         Page<T> p = new Page<>(requestPage.getPageNum(), pageSize);
         IPage<T> pageData = function.apply(p);

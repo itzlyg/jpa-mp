@@ -14,5 +14,5 @@ import com.jpamp.system.entity.OrderInf;
  */
 public interface OrderService extends IService<OrderInf> {
 
-    void asyncTest ();
+    void asyncTest();
 }

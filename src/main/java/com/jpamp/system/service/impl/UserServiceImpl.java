@@ -31,7 +31,7 @@ public class UserServiceImpl extends ServiceImpl<UserInfMapper, UserInf> impleme
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
-    public void insert (String params){
+    public void insert(String params) {
         UserInf inf = new UserInf();
         inf.setAge(12);
         inf.setCreateTime(LocalDateTime.now());
@@ -43,9 +43,9 @@ public class UserServiceImpl extends ServiceImpl<UserInfMapper, UserInf> impleme
     }
 
     @Override
-    public BaseResponse<List<UserInf>> userPage (BaseRequest<String> request){
+    public BaseResponse<List<UserInf>> userPage(BaseRequest<String> request) {
         UserInf params = new UserInf();
         params.setAge(12);
-        return CustUtil.page(request.getPage(), pa -> mapper.userPage(pa, params)) ;
+        return CustUtil.page(request.getPage(), pa -> mapper.userPage(pa, params));
     }
 }

@@ -27,12 +27,12 @@ public class SnowFlake {
     // ==============================Fields===========================================
 
     /** 机器id默认值  */
-    private static final String DEF_STR = "candy_water";
+    private static final String DEF_STR = "jpa-mp";
 
     /**
-     * 开始时间截 (2015-01-01)
+     * 开始时间截 (2022-01-01)
      */
-    private final long twepoch = 1489111610226L;
+    private final long twepoch = 1640966400000L;
 
     /**
      * 机器id所占的位数

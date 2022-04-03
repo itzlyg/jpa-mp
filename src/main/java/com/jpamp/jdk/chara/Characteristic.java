@@ -1,4 +1,4 @@
-package com.jpamp.util;
+package com.jpamp.jdk.chara;
 
 import com.jpamp.jdk.entity.DataRecord;
 import com.jpamp.jdk.entity.SelectRecord;

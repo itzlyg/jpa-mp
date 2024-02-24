@@ -5,6 +5,12 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+/**
+ * @Description
+ * @Copyright Copyright (c) 2024
+ * @author xieyubin
+ * @since 2024-02-24 20:02:35
+ */
 @Entity
 @Table(name = "wt_jpa_inf")
 public class JpaInf extends BaseJpaEntity {

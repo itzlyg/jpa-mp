@@ -6,6 +6,12 @@ import com.jpamp.system.vo.BaseResponse;
 
 import java.util.List;
 
+/**
+ * @Description 
+ * @Copyright Copyright (c) 2024
+ * @author xieyubin
+ * @since 2024-02-24 20:02:46
+ */
 public interface DataService {
 
     String addJpa();

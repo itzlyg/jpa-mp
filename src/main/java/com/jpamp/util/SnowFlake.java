@@ -1,11 +1,13 @@
 package com.jpamp.util;
 
-import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Objects;
 
 /**
  * Twitter_Snowflake<br>
@@ -191,7 +193,11 @@ public class SnowFlake {
             return str2Long(hostAddress);
         } catch (UnknownHostException e) {
             // 如果获取失败，则使用随机数备用
-            return RandomUtils.nextLong(0, 31);
+            try {
+                return SecureRandom.getInstanceStrong().nextLong(0, 31);
+            } catch (NoSuchAlgorithmException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
@@ -201,7 +207,7 @@ public class SnowFlake {
      * @return
      */
     private static Long getDataCenterId() {
-        String hostName = StringUtils.defaultString(SystemUtils.getHostName(), DEF_STR);
+        String hostName = Objects.toString(SystemUtils.getHostName(), DEF_STR);
         return str2Long(hostName);
     }
 

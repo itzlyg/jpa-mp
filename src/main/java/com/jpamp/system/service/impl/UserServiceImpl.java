@@ -7,7 +7,7 @@ import com.jpamp.system.service.UserService;
 import com.jpamp.system.vo.BaseRequest;
 import com.jpamp.system.vo.BaseResponse;
 import com.jpamp.util.CustUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +26,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserInfMapper, UserInf> implements UserService {
 
-    @Autowired
+    @Resource
     private UserInfMapper mapper;
 
     @Override

@@ -19,8 +19,6 @@ import java.time.LocalDateTime;
 @TableName("wt_order_inf")
 public class OrderInf implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
 
@@ -30,7 +28,7 @@ public class OrderInf implements Serializable {
 
     /** 用户ID */
     @TableField("user_id")
-    private Integer userId;
+    private String userId;
 
     /** 支付金额 */
     @TableField("price")
@@ -62,11 +60,11 @@ public class OrderInf implements Serializable {
     public void setOrderNo(String orderNo) {
         this.orderNo = orderNo;
     }
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
     public BigDecimal getPrice() {

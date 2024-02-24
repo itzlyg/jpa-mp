@@ -1,8 +1,8 @@
 package com.jpamp.config.jpa;
 
 import com.jpamp.context.Context;
+import jakarta.annotation.Resource;
 import jakarta.persistence.EntityManagerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
@@ -29,10 +29,10 @@ import java.util.Map;
         transactionManagerRef = "multipleTransactionManager")
 public class JpaEntityManager {
 
-    @Autowired
+    @Resource
     private JpaProperties jpaProperties;
 
-    @Autowired
+    @Resource
     private DataSource multipleDataSource;
 
     @Bean

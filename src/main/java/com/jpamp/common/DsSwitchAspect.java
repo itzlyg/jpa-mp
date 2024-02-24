@@ -1,11 +1,12 @@
 package com.jpamp.common;
 
-import org.apache.commons.lang3.RandomUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.security.SecureRandom;
 
 /**
  * aop
@@ -28,7 +29,7 @@ public class DsSwitchAspect {
     @Around("controllerAsp()")
     public Object controllerAop(ProceedingJoinPoint joinPoint) throws Throwable {
         // mock user
-        Integer u = RandomUtils.nextInt(0, 10);
+        int u = SecureRandom.getInstanceStrong().nextInt(0, 10);
         String tenantId = String.valueOf(u % 2);
         log.info("切换到数据库{}，执行业务逻辑...", DbContextHolder.TENANT_DB.get(tenantId));
         DbContextHolder.setDbType(tenantId);

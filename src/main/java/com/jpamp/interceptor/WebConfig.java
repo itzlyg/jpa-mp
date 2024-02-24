@@ -1,14 +1,20 @@
 package com.jpamp.interceptor;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * @Description 
+ * @Copyright Copyright (c) 2024
+ * @author xieyubin
+ * @since 2024-02-24 19:43:02
+ */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Autowired
+    @Resource
     private DataHandlerInterceptor handlerInterceptor;
 
     @Override

@@ -10,6 +10,12 @@ import org.apache.commons.lang3.RandomStringUtils;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * @Description
+ * @Copyright Copyright (c) 2024
+ * @author xieyubin
+ * @since 2024-02-24 19:23:22
+ */
 public class CustUtil {
 
     public static final String CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -30,7 +36,7 @@ public class CustUtil {
         List<T> datas = pageData.getRecords();
         PagingResponse page = new PagingResponse();
         long total = pageData.getTotal();
-        Long totalPage = total / pageSize;
+        long totalPage = total / pageSize;
         if (total % pageSize != 0) {
             totalPage += 1;
         }

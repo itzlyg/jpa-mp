@@ -6,6 +6,13 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import java.util.Map;
 
+/**
+ * 配置
+ * @Description
+ * @Copyright Copyright (c) 2024
+ * @author xieyubin
+ * @since 2024-02-24 18:02:02
+ */
 @Configuration
 @ConfigurationProperties(prefix = "spring")
 public class DynamicDsProperties {

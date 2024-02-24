@@ -5,7 +5,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-
+/**
+ * 启动
+ * @Description
+ * @Copyright Copyright (c) 2024
+ * @author xieyubin
+ * @since 2024-02-24 18:19:37
+ */
 @EnableAsync
 @EnableScheduling
 @SpringBootApplication

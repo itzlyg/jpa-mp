@@ -12,10 +12,10 @@ import com.jpamp.system.service.UserService;
 import com.jpamp.system.vo.BaseRequest;
 import com.jpamp.system.vo.BaseResponse;
 import com.jpamp.util.CustUtil;
+import jakarta.annotation.Resource;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,19 +28,25 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.stream.Collectors;
 
+/**
+ * @Description
+ * @Copyright Copyright (c) 2024
+ * @author xieyubin
+ * @since 2024-02-24 19:41:23
+ */
 @Service
 public class DataServiceImpl implements DataService {
 
-    @Autowired
+    @Resource
     private JpaService jpaService;
 
-    @Autowired
+    @Resource
     private UserService userService;
 
-    @Autowired
+    @Resource
     private OrderService orderService;
 
-    private Logger log = LoggerFactory.getLogger(DataServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(DataServiceImpl.class);
 
     @Override
     public String addJpa() {
@@ -100,11 +106,11 @@ public class DataServiceImpl implements DataService {
             futures.add(asyncThread(executor, context));
         }
         int s = 0;
-        CompletableFuture<Void> downFutures = CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()]));
+        CompletableFuture<Void> downFutures = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
         CompletableFuture<List<Integer>> ints = downFutures.thenApply(v -> futures.stream().map(CompletableFuture::join).collect(Collectors.toList()));
         try {
             List<Integer> list = ints.get();
-            s += list.stream().collect(Collectors.summingInt(Integer::intValue));
+            s += list.stream().mapToInt(Integer::intValue).sum();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

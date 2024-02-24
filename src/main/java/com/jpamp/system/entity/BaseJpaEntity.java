@@ -1,6 +1,7 @@
 package com.jpamp.system.entity;
 
 import com.jpamp.context.Context;
+import com.jpamp.util.JpaIdGenerator;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -19,7 +20,7 @@ import java.time.LocalDateTime;
 public abstract class BaseJpaEntity implements Serializable {
     @Id
     @GeneratedValue(generator = Context.JPA_ID_NAME)
-    @GenericGenerator(name = Context.JPA_ID_NAME, strategy = Context.JPA_STRATEGY)
+    @GenericGenerator(name = Context.JPA_ID_NAME, type = JpaIdGenerator.class)
     private String id;
     /** 创建时间 */
     @Column(name = "create_time")

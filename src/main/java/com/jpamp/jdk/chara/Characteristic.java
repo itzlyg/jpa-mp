@@ -2,7 +2,6 @@ package com.jpamp.jdk.chara;
 
 import com.jpamp.jdk.entity.DataRecord;
 import com.jpamp.jdk.entity.SelectRecord;
-import com.jpamp.system.entity.UserInf;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -270,15 +269,15 @@ public class Characteristic {
         }
 
         // 新的
-        switch (o) {
-            case null      -> System.out.println("首先判断对象是否为空，走空指针逻辑等后续逻辑");
-            case Integer i -> System.out.println("判断是否为Intger对象,i:" + i);
-            case String s  -> System.out.println("判断是否为字符串，s:" + s);
-            case Record p  -> System.out.println("判断是否为Record类型: " + p.toString());
-            case int[] arr -> System.out.println("判断是否为数组，展示int数组的长度" + arr.length);
-
-            case UserInf s   -> System.out.println("判断是否为具体学生对象，UserInf:" + s.toString());
-            default   -> System.out.println("Something else");
-        }
+//        switch (o) {
+//            case null      -> System.out.println("首先判断对象是否为空，走空指针逻辑等后续逻辑");
+//            case Integer i -> System.out.println("判断是否为Intger对象,i:" + i);
+//            case String s  -> System.out.println("判断是否为字符串，s:" + s);
+//            case Record p  -> System.out.println("判断是否为Record类型: " + p.toString());
+//            case int[] arr -> System.out.println("判断是否为数组，展示int数组的长度" + arr.length);
+//
+//            case UserInf s   -> System.out.println("判断是否为具体学生对象，UserInf:" + s.toString());
+//            default   -> System.out.println("Something else");
+//        }
     }
 }

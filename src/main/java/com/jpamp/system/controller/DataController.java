@@ -6,9 +6,9 @@ import com.jpamp.system.service.DataService;
 import com.jpamp.system.vo.BaseRequest;
 import com.jpamp.system.vo.BaseResponse;
 import com.jpamp.util.CustUtil;
+import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,9 +29,9 @@ import java.util.List;
 @RequestMapping("/api")
 public class DataController {
 
-    private Logger log = LoggerFactory.getLogger(DataController.class);
+    private static final Logger log = LoggerFactory.getLogger(DataController.class);
 
-    @Autowired
+    @Resource
     private DataService dataService;
 
     @GetMapping("/jpa")

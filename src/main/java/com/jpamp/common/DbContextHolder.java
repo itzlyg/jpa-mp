@@ -14,35 +14,35 @@ import java.util.Map;
  */
 public class DbContextHolder {
 
-    private static final ThreadLocal<String> contextHolder = new TransmittableThreadLocal<>();
+    private static final ThreadLocal<String> CONTEXT_HOLDER = new TransmittableThreadLocal<>();
 
     /**
      * 多租户与数据库的映射关系
      */
-    public static Map<String, String> TENANT_DB = new HashMap();
+    public static Map<String, String> TENANT_DB = new HashMap<>();
 
     /**
      * 设置数据源
      *
-     * @param tenantId
+     * @param tenantId tenantId
      */
     public static void setDbType(String tenantId) {
-        contextHolder.set(TENANT_DB.get(tenantId));
+        CONTEXT_HOLDER.set(TENANT_DB.get(tenantId));
     }
 
     /**
      * 取得当前数据源
      *
-     * @return
+     * @return 类型
      */
     public static String getDbType() {
-        return contextHolder.get();
+        return CONTEXT_HOLDER.get();
     }
 
     /**
      * 清除上下文数据
      */
     public static void clearDbType() {
-        contextHolder.remove();
+        CONTEXT_HOLDER.remove();
     }
 }
